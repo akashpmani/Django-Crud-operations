@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      input:focus {
+        border-color: #2563eb;
+      }
+      button:hover {
+        background: green;
+      }
+      div:focus-within {
+        border-color: #2563eb;
+      }
+      #tandc:hover {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- component -->
+    <!-- page -->
+    <main class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
+      <!-- component -->
+      
+      <form action="signup" method="post">
+      {% csrf_token %}
+      
+      <section class="flex w-[30rem] flex-col space-y-10">
+        
+        <div class="text-center text-4xl font-medium">Sign Up!</div>
+
+        
+
+        <div class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
+          <input type="text" name="username" id="username" placeholder="Username" class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" required/>
+        </div>
+
+        <div class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
+          <input type="email" name="email" placeholder="Email" id="email" class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" required/>
+        </div>
+
+        <div class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
+          <input type="password" name="pass1" id="pass1" placeholder="Re-enter Password" class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none focus:border-blue-500" required/>
+        </div>
+
+        <div class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
+          <input type="password" name="pass2" id="pass2" placeholder="Re-enter Password" class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none focus:border-blue-500" required/>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" required />
+          <label class="form-check-label" for="exampleCheck1"><a href="#" class="py-2 duration-300" id="tandc">Agreed to the T&C</a></label>
+        </div>
+        {% if messages %}
+        <ul class="messages" style="color: red;">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+        <button type="submit" class="transform rounded-tl-2xl rounded-br-2xl bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-500"><a href="">SIGN UP</a></button>
+      
+      </section>
+      
+      
+    </form>
+    </main>
+
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js"></script>
+  </body>
+</html>

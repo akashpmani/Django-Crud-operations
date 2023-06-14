@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="text-center alert alert-info">ADD NEW USER</h4>
+            <form action="" method="POST">
+                
+                {% csrf_token %}
+                {{form.as_p}}
+                {% if messages %}
+                    <ul class="messages" style="color: red">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <input type="submit" class="btn btn-success">
+            </form>
+        </div>
+        <div class="col-sm-6 offset-2">
+            <h4 class="text-center alert alert-info">USER INFORMATIONS</h4>
+            {% if users %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">EMAIL</th>
+                            <th scope="col">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usr in users %}
+                        <tr>
+                            <th scope="row">{{usr.id}}</th>
+                            <td>{{usr.username}}</td>
+                            <td>{{usr.email}}</td>
+                            <td>
+                                <a href="{% url 'update_user' usr.id %}" class="btn btn-warning btn-sm">EDIT</a>
+                                <form action="{% url 'delete_user' usr.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger" value="DELETE">
+                                </form>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+            {% else %}
+                <h6 class="text-center alert alert-warning">NO USER RECORDS</h4>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
